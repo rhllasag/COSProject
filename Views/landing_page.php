@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Contacts Orchestrator Solution -V </title>
+    <title>Contacts Orchestrator Solution</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 </head>
 <body>
 <div class="container">
-    <h3>Contacts Orchestrator Solution - Updates</h3>
+    <h3>Contacts Orchestrator Solution</h3>
     <div class="panel">
         <table class="table table-striped">
             <thead>
