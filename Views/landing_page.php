@@ -8,7 +8,7 @@
 <body>
 <div class="container">
     <h3>Contacts Orchestrator Solution</h3>
-    <span>Number of contacts on the list: </span><span id="num-contacts"><?= $numContacts  ?></span>
+    <span>Number of contacts on the list: </span><span id="num-contacts"><?= $numContacts  ?> aleluia</span>
     <div class="panel">
         <table class="table table-striped">
             <thead>
