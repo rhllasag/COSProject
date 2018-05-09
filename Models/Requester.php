@@ -43,6 +43,6 @@ class Requester {
     }
 
     public static function getContactById($id) {
-        return self::send(self::$base_url . 's/contact/byguid/' . $id, 'GET');
+        return self::send(self::$base_url . '/contact/byguid/' . $id, 'GET');
     }
 }
