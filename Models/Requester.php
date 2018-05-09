@@ -3,6 +3,7 @@
 namespace qos\Models;
 
 class Requester {
+    private static $base_url = "http://contactsqs2.apphb.com/Service.svc/rest";
 
     public static function send($url, $method) {
         $ch = curl_init($url);
@@ -21,26 +22,27 @@ class Requester {
             exit(2);
         }
         curl_close($ch);
+        
         return json_decode($result);
     }
 
     public static function getContacts() {
-        return self::send('http://contactsqs.apphb.com/Service.svc/rest/contacts', 'GET');
+        return self::send('rest/contacts', 'GET');
     }
 
     public static function getContactsShort() {
-        return self::send('http://contactsqs.apphb.com/Service.svc/rest/contacts/short', 'GET');
+        return self::send(self::$base_url . '/contacts/short', 'GET');
     }
 
     public static function getContactsCount() {
-        return self::send('http://contactsqs.apphb.com/Service.svc/rest/contacts/count', 'GET');
+        return self::send(self::$base_url . '/contacts/count', 'GET');
     }
 
     public static function getContactByName($name) {
-        return self::send('http://contactsqs.apphb.com/Service.svc/rest/contact/byname/' . $name, 'GET');
+        return self::send(self::$base_url . '/contact/byname/' . $name, 'GET');
     }
 
     public static function getContactById($id) {
-        return self::send('http://contactsqs.apphb.com/Service.svc/rest/contact/byguid/' . $id, 'GET');
+        return self::send(self::$base_url . 's/contact/byguid/' . $id, 'GET');
     }
 }
