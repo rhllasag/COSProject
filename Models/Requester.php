@@ -27,7 +27,7 @@ class Requester {
     }
 
     public static function getContacts() {
-        return self::send('rest/contacts', 'GET');
+        return self::send(self::$base_url . 'rest/contacts', 'GET');
     }
 
     public static function getContactsShort() {
