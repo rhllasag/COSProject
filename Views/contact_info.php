@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Contacts Orchestrator Solution - Contact details</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-</head>
-<body>
+<?php include_once('common/header.php') ?>
 <div class="container">
     <a href="index.php" class="btn btn-primary" style="margin-top: 10px; margin-bottom: 20px">Go back</a>
     <div class="panel">
