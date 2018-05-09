@@ -95,8 +95,17 @@
                     <?= $contact->Company ?>
                 </td>
             </tr>
+            <tr>
+                <td>
+                    Source
+                </td>
+                <td>
+                    <?= $contact->Source ?>
+                </td>
+            </tr>
         </table>
     </div>
+    <button class="btn btn-primary">Review contacts</button>
 </div>
 </body>
 </html>
