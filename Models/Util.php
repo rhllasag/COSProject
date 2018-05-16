@@ -3,7 +3,7 @@
 namespace qos\Models;
 
 Class Util {
-    public static function getFilteredContacts($facebook_active, $linked_in_active) {
+    public static function getFilteredContacts($facebook_active, $linked_in_active, $facebook_only, $linked_in_only) {
         $contacts_original = Requester::getContacts();
         $contacts = [];
 
@@ -16,12 +16,19 @@ Class Util {
                 continue;
             }
 
-            if (!$facebook_active && $contact->Source == 'Facebook') {
-                continue;
-            }
+            if($facebook_only || $linked_in_only) {
+                if(($contact->Source == 'Facebook' && $linked_in_only)
+                || $contact->Source == 'LinkedIn' && $facebook_only) {
+                    continue;
+                }
+            } else {
+                if (!$facebook_active && $contact->Source == 'Facebook') {
+                    continue;
+                }
 
-            if (!$linked_in_active && $contact->Source == 'LinkedIn') {
-                continue;
+                if (!$linked_in_active && $contact->Source == 'LinkedIn') {
+                    continue;
+                }
             }
 
             $contacts[] = $contact;

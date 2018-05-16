@@ -2,8 +2,7 @@
 
 require_once('Models/Requester.php');
 require_once('Models/Util.php');
-
-session_start();
+require_once('Logic/session_cleaner.php');
 
 //
 // AJAX REQUEST
@@ -17,10 +16,34 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'
         $facebook_active = !empty($_GET['facebook_selected']) && $_GET['facebook_selected'] === 'true';
         $linked_in_active = !empty($_GET['linked_in_selected']) && $_GET['linked_in_selected'] === 'true';
 
+        $facebook_only = !empty($_SESSION['facebook_only']) && $_SESSION['facebook_only'] === true;
+        $linked_in_only = !empty($_SESSION['linked_in_only']) && $_SESSION['linked_in_only'] === true;
+
+
+        if (!empty($_GET['facebook_only'])) {
+            $_SESSION['facebook_only'] = true;
+            $facebook_only = true;
+
+            if (!empty($_SESSION['linked_in_only'])) {
+                unset($_SESSION['linked_in_only']);
+            }
+
+            $linked_in_only = false;
+        } elseif (!empty($_GET['linked_in_only'])) {
+            $_SESSION['linked_in_only'] = true;
+            $linked_in_only = true;
+
+            if (!empty($_SESSION['facebook_only'])) {
+                unset($_SESSION['facebook_only']);
+            }
+            $facebook_only = false;
+        }
+
         $_SESSION['facebook_active'] = $facebook_active;
         $_SESSION['linked_in_active'] = $linked_in_active;
 
-        $contacts = qos\Models\Util::getFilteredContacts($facebook_active, $linked_in_active);
+
+        $contacts = qos\Models\Util::getFilteredContacts($facebook_active, $linked_in_active, $facebook_only, $linked_in_only);
         $numContacts = count($contacts);
         $contacts_table = \qos\Models\Util::renderContactsTable('Views/contacts_table.php', $contacts);
 
@@ -47,8 +70,19 @@ if (!isset($_SESSION['linked_in_active'])) {
 }
 $linked_in_active = $_SESSION['linked_in_active'];
 
+$facebook_only = false;
+$linked_in_only = false;
+
+if (!empty($_SESSION['facebook_only']) && $_SESSION['facebook_only']) {
+    $facebook_only = true;
+}
+
+if (!empty($_SESSION['linked_in_only']) && $_SESSION['linked_in_only']) {
+    $linked_in_only = true;
+}
+
 // Contacts
-$contacts = qos\Models\Util::getFilteredContacts($facebook_active, $linked_in_active);
+$contacts = qos\Models\Util::getFilteredContacts($facebook_active, $linked_in_active, $facebook_only, $linked_in_only);
 $numContacts = empty($contacts) ? 0 : count($contacts);
 
 $contacts_table = \qos\Models\Util::renderContactsTable('Views/contacts_table.php', $contacts);

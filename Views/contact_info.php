@@ -98,7 +98,6 @@
             </tr>
         </table>
     </div>
-    <button class="btn btn-primary">Review contacts</button>
 </div>
 </body>
 </html>
