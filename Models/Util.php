@@ -37,6 +37,7 @@ Class Util {
         return $contacts;
     }
 
+
     public static function renderContactsTable($table_path, $contacts) {
         ob_start();
         include($table_path);

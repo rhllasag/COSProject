@@ -2,6 +2,8 @@
 
 namespace qos\Logic;
 
+session_start();
+
 if (!empty($_GET['clear_session'])) {
     if (!empty($_SESSION['facebook_only'])) {
         unset($_SESSION['facebook_only']);

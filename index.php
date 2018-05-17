@@ -39,9 +39,18 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'
             $facebook_only = false;
         }
 
-        $_SESSION['facebook_active'] = $facebook_active;
-        $_SESSION['linked_in_active'] = $linked_in_active;
+        if (!empty($_GET['show_all'])) {
+            if (!empty($_SESSION['facebook_only'])) {
+                unset($_SESSION['facebook_only']);
+            }
 
+            if (!empty($_SESSION['linked_in_only'])) {
+                unset($_SESSION['linked_in_only']);
+            }
+            
+            $facebook_only = false;
+            $linked_in_only = false;
+        }
 
         $contacts = qos\Models\Util::getFilteredContacts($facebook_active, $linked_in_active, $facebook_only, $linked_in_only);
         $numContacts = count($contacts);
