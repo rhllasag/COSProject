@@ -2,7 +2,9 @@
 
 namespace qos\Logic;
 
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 if (!empty($_GET['clear_session'])) {
     if (!empty($_SESSION['facebook_only'])) {

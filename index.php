@@ -16,6 +16,10 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'
         $facebook_active = !empty($_GET['facebook_selected']) && $_GET['facebook_selected'] === 'true';
         $linked_in_active = !empty($_GET['linked_in_selected']) && $_GET['linked_in_selected'] === 'true';
 
+        $_SESSION['facebook_active'] = $facebook_active;
+        $_SESSION['linked_in_active'] = $linked_in_active;
+
+
         $facebook_only = !empty($_SESSION['facebook_only']) && $_SESSION['facebook_only'] === true;
         $linked_in_only = !empty($_SESSION['linked_in_only']) && $_SESSION['linked_in_only'] === true;
 
@@ -47,7 +51,7 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'
             if (!empty($_SESSION['linked_in_only'])) {
                 unset($_SESSION['linked_in_only']);
             }
-            
+
             $facebook_only = false;
             $linked_in_only = false;
         }
