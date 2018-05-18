@@ -7,6 +7,7 @@ require_once('Logic/session_cleaner.php');
 //
 // AJAX REQUEST
 //
+//
 if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest') {
     header('Content-Type: application/json');
     $string = str_replace('/', '', $_SERVER['REQUEST_URI']);
