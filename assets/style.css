@@ -66,6 +66,10 @@ input:checked + .slider:before {
     margin-right: 10px;
 }
 
+input.radio, input.checkbox {
+    margin-right: 10px;
+}
+
 .network-label:hover{
     cursor: pointer;
     color: blue;

@@ -7,6 +7,14 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 if (!empty($_GET['clear_session'])) {
+    if (!empty($_SESSION['contacts'])) {
+        unset($_SESSION['contacts']);
+    }
+
+    if (!empty($_SESSION['solved_duplicates'])) {
+        unset($_SESSION['solved_duplicates']);
+    }
+
     if (!empty($_SESSION['facebook_only'])) {
         unset($_SESSION['facebook_only']);
     }

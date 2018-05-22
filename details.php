@@ -1,7 +1,6 @@
 <?php
 
 require_once('Models/Requester.php');
-session_start();
 require_once('Logic/session_cleaner.php');
 
 if (empty($_GET['id'])) {

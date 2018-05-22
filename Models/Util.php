@@ -37,6 +37,94 @@ Class Util {
         return $contacts;
     }
 
+    public static function getDuplicates($contacts) {
+        if (empty($contacts)) {
+            return [];
+        }
+
+        $duplicates = [
+            'Name' => [],
+            'Phone' => [],
+            'Email' => []
+        ];
+
+        foreach ($contacts as $key => $contact) {
+
+            if (isset($duplicates['Name'][$contact->GivenName. ' ' . $contact->Surname])) {
+                continue;
+            }
+
+            if (isset($duplicates['Phone'][$contact->Phone])) {
+                continue;
+            }
+
+            if (isset($duplicates['Email'][$contact->Email])) {
+                continue;
+            }
+
+            $obj = new \stdClass();
+            $obj->counter = 0;
+            $obj->users = [$contact];
+            $duplicates['Name'][$contact->GivenName. ' ' . $contact->Surname] = $obj;
+
+            $obj = new \stdClass();
+            $obj->counter = 0;
+            $obj->users = [$contact];
+            $duplicates['Phone'][$contact->Phone] = $obj;
+
+            $obj = new \stdClass();
+            $obj->counter = 0;
+            $obj->users = [$contact];
+            $duplicates['Email'][$contact->Email] = $obj;
+
+            foreach ($contacts as $key2 => $contact2) {
+
+                // Do not compare with itself
+                if($key == $key2) {
+                    continue;
+                }
+
+                if (strcmp($contact->GivenName. ' ' . $contact->Surname, $contact2->GivenName. ' ' . $contact2->Surname) == 0) {
+                    $duplicates['Name'][$contact2->GivenName. ' ' . $contact2->Surname]->counter++;
+                    $duplicates['Name'][$contact2->GivenName. ' ' . $contact2->Surname]->users[] = $contact2;
+                    //continue;
+                }
+
+                if (strcmp($contact->Email, $contact2->Email) == 0) {
+                    $duplicates['Email'][$contact2->Email]->counter++;
+                    $duplicates['Email'][$contact2->Email]->users[] = $contact2;
+                    //continue;
+                }
+
+                if (strcmp($contact->Phone, $contact2->Phone) == 0) {
+                    $duplicates['Phone'][$contact2->Phone]->counter++;
+                    $duplicates['Phone'][$contact2->Phone]->users[] = $contact2;
+                    //continue;
+                }
+            }
+        }
+
+        return $duplicates;
+    }
+
+    public static function generateCSV($contacts) {
+        if (count($contacts) == 0) {
+            return null;
+        }
+
+        $contacts = json_decode(json_encode($contacts), true);
+
+        ob_start();
+        $df = fopen("php://output", 'w');
+        fputcsv($df, array_keys(reset($contacts)));
+
+        foreach ($contacts as $row) {
+            fputcsv($df, $row);
+        }
+
+        fclose($df);
+        return ob_get_clean();
+    }
 
     public static function renderContactsTable($table_path, $contacts) {
         ob_start();

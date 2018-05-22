@@ -24,7 +24,7 @@
     </div>
     <div style="margin-bottom: 10px">
         <button class="btn btn-success" onclick="reloadList('show_all')">Show all</button>
-        <a class="btn btn-primary" style="float: right; color:white">Solve duplicated</a>
+        <a href="duplicate.php" class="btn btn-primary" style="float: right; color:white">Solve duplicated</a>
     </div>
     <div class="panel" id="contacts_table_holder">
         <?php echo $contacts_table; ?>
