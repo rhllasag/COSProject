@@ -3,9 +3,7 @@
      <h3>Duplicate contacts</h3>
      <div style="padding-bottom: 20px;">
          <a class="btn btn-primary" href="index.php">Go back</a>
-         <a class="btn btn-success <?php if(!count($solved_duplicates)) {echo "disabled";}?>" href="export.php" style="float: right" >
-             <?php if(count($solved_duplicates)) { echo "Export " . count($solved_duplicates) . " contacts"; } else { echo "No contacts to export"; } ?>
-         </a>
+         <a class="btn btn-success" href="export.php" style="float: right">Export</a>
      </div>
      <div class="panel" id="duplicate_contacts_table_holder">
          <?php if(!empty($duplicates)) { ?>
@@ -40,9 +38,7 @@
      </div>
      <div style="padding-bottom: 20px;">
          <a class="btn btn-primary" href="index.php">Go back</a>
-         <a class="btn btn-success <?php if(!count($solved_duplicates)) {echo "disabled";}?>" href="export.php" style="float: right" >
-             <?php if(count($solved_duplicates)) { echo "Export " . count($solved_duplicates) . " contacts"; } else { echo "No contacts to export"; } ?>
-         </a>
+         <a class="btn btn-success" href="export.php" style="float: right" >Export</a>
      </div>
  </div>
  </body>

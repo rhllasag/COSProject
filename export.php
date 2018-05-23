@@ -3,8 +3,8 @@
 require_once('Logic/session_cleaner.php');
 require_once('Models/Util.php');
 
-if(empty($_SESSION['solved_duplicates'])) {
-    echo json_encode(['status' => 400, 'message' => 'No solved duplicates to export']);
+if(empty($_SESSION['contacts']) && empty($_SESSION['solved_duplicates'])) {
+    echo json_encode(['status' => 400, 'message' => 'No contacts to export']);
     exit();
 }
 
@@ -24,7 +24,28 @@ header("Content-Transfer-Encoding: binary");
 // create a file pointer connected to the output stream
 $output = fopen('php://output', 'w');
 
-$contacts = json_decode(json_encode($_SESSION['solved_duplicates']), true);
+$duplicate_guids = [];
+$solved_duplicates = json_decode(json_encode($_SESSION['solved_duplicates']), true);
+$contacts = \qos\Models\Util::getFilteredContacts(true, true, false, false);
+
+foreach ($solved_duplicates as $d) {
+    $duplicate_guids[] = $d['Guid'];
+}
+
+$payload = [];
+
+foreach ($contacts as $contact) {
+    if(in_array($contact->Guid, $duplicate_guids)) {
+        continue;
+    }
+
+    $contact->Email = [$contact->Email];
+    $contact->Phone = [$contact->Phone];
+    $payload[] = json_decode(json_encode($contact), true);
+}
+
+
+$contacts_list = array_merge($payload, $solved_duplicates);
 
 fputcsv($output, [
     'Guid',
@@ -33,7 +54,7 @@ fputcsv($output, [
     'Phone'
 ], ';');
 
-foreach ($contacts as $contact) {
+foreach ($contacts_list as $contact) {
     fputcsv($output, [
         $contact['Guid'],
         $contact['GivenName']. ' ' . $contact['Surname'],

@@ -3,6 +3,8 @@
 require_once('Models/Requester.php');
 require_once('Logic/session_cleaner.php');
 
+$title = "Contacts Orchestrator Solution - Contact details";
+
 if (empty($_GET['id'])) {
     echo json_encode(['status' => 400, 'message' => 'User guid is required']);
     return;

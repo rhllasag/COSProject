@@ -2,6 +2,8 @@
 
 namespace qos\Models;
 
+require_once('Requester.php');
+
 Class Util {
     public static function getFilteredContacts($facebook_active, $linked_in_active, $facebook_only, $linked_in_only) {
         $contacts_original = Requester::getContacts();

@@ -4,6 +4,7 @@ require_once('Models/Requester.php');
 require_once('Models/Util.php');
 require_once('Logic/session_cleaner.php');
 
+$title = "Contacts Orchestrator Solution - Duplicated contacts";
 
 if (!empty($_SESSION['contacts'])) {
     $duplicates = $_SESSION['contacts'];
