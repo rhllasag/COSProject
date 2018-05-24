@@ -7,27 +7,27 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 if (!empty($_GET['clear_session'])) {
-    if (!empty($_SESSION['contacts'])) {
+    if (isset($_SESSION['contacts'])) {
         unset($_SESSION['contacts']);
     }
 
-    if (!empty($_SESSION['solved_duplicates'])) {
+    if (isset($_SESSION['solved_duplicates'])) {
         unset($_SESSION['solved_duplicates']);
     }
 
-    if (!empty($_SESSION['facebook_only'])) {
+    if (isset($_SESSION['facebook_only'])) {
         unset($_SESSION['facebook_only']);
     }
 
-    if (!empty($_SESSION['linked_in_only'])) {
+    if (isset($_SESSION['linked_in_only'])) {
         unset($_SESSION['linked_in_only']);
     }
 
-    if (!empty($_SESSION['facebook_active'])) {
+    if (isset($_SESSION['facebook_active'])) {
         unset($_SESSION['facebook_active']);
     }
 
-    if (!empty($_SESSION['linked_in_active'])) {
+    if (isset($_SESSION['linked_in_active'])) {
         unset($_SESSION['linked_in_active']);
     }
 }
