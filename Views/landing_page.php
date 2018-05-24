@@ -4,14 +4,14 @@
     <div style="margin-top: 20px; margin-bottom: 10px">
         <div style="display: inline-flex;">
             <div style="display: table-cell;vertical-align: middle;">
-                <label onclick="reloadList('facebook_only')" class="network-label">Facebook</label>
+                <label id="facebook_only_toggle" onclick="reloadList('facebook_only')" class="network-label">Facebook</label>
                 <label class="switch">
                     <input id="facebook_checkbox" type="checkbox" onchange="reloadList()" <?php if($facebook_active) { echo 'checked';} ?>>
                     <span class="slider round"></span>
                 </label>
             </div>
             <div style="display: table-cell;vertical-align: middle;">
-                <label onclick="reloadList('linked_in_only')" class="network-label" style="margin-left: 10px">LinkedIn</label>
+                <label id="linkedin_only_toggle" onclick="reloadList('linked_in_only')" class="network-label" style="margin-left: 10px">LinkedIn</label>
                 <label class="switch">
                     <input id="linked_in_checkbox" type="checkbox" onchange="reloadList()" <?php if($linked_in_active) { echo 'checked';} ?>>
                     <span class="slider round"></span>
