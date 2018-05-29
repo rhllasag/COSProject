@@ -61,6 +61,8 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'
         $numContacts = count($contacts);
         $contacts_table = \qos\Models\Util::renderContactsTable('Views/contacts_table.php', $contacts);
 
+        require('Logic/session_cleaner.php');
+
         echo json_encode([
             'html' => $contacts_table,
             'numContacts' => $numContacts
@@ -69,6 +71,7 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'
     }
 }
 
+require('Logic/session_cleaner.php');
 //
 // NORMAL REQUEST
 //

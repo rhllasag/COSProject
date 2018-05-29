@@ -41,6 +41,13 @@ foreach ($contacts as $contact) {
 
     $contact->Email = [$contact->Email];
     $contact->Phone = [$contact->Phone];
+    $contact->PhotoUrl = [$contact->PhotoUrl];
+    $contact->Birthday = [$contact->Birthday];
+    $contact->Company = [$contact->Company];
+    $contact->City = [$contact->City];
+    $contact->Occupation = [$contact->Occupation];
+    $contact->Source = [$contact->Source];
+    $contact->StreetAddress = [$contact->StreetAddress];
     $payload[] = json_decode(json_encode($contact), true);
 }
 
@@ -51,15 +58,29 @@ fputcsv($output, [
     'Guid',
     'Name',
     'Email',
-    'Phone'
+    'Phone',
+    'PhotoUrl',
+    'Birthday',
+    'Company',
+    'City',
+    'Occupation',
+    'Source',
+    'StreetAddress'
 ], ';');
 
 foreach ($contacts_list as $contact) {
     fputcsv($output, [
         $contact['Guid'],
         $contact['GivenName']. ' ' . $contact['Surname'],
-        implode($contact['Email'], ';'),
-        implode($contact['Phone'], ';')
+        implode($contact['Email'], '|'),
+        implode($contact['Phone'], '|'),
+        implode($contact['PhotoUrl'], '|'),
+        implode($contact['Birthday'], '|'),
+        implode($contact['Company'], '|'),
+        implode($contact['City'], '|'),
+        implode($contact['Occupation'], '|'),
+        implode($contact['Source'], '|'),
+        implode($contact['StreetAddress'], '|')
     ], ';');
 }
 

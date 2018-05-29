@@ -24,8 +24,9 @@
                             <td>
                                 <?= $info->counter ?>
                             </td>
-                            <td>
+                            <td style="max-width: 100px">
                                 <a class="btn btn-success" href="solve_duplicate.php?duplicate_field=<?= $field_name ?>&key=<?= $repeated_field ?>"> Solve</a>
+                                <a class="btn btn-default" href="../solve.php?duplicate_field=<?= $field_name ?>&key=<?= $repeated_field ?>&cancel=true"> Cancel</a>
                             </td>
                         </tr>
                     <?php } ?>
